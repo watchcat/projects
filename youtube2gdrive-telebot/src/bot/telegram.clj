@@ -12,8 +12,9 @@
               :body         (json/encode body)}))
 
 (defn send-message
-  [token chat-id text]
+  [token chat-id text & {:keys [reply_markup]}]
   (request token "sendMessage"
-           {:chat_id                   chat-id
-            :text                      text
-            :disable_web_page_preview  true}))
+           (cond-> {:chat_id    chat-id
+                    :text       text
+                    :disable_web_page_preview true}
+             reply_markup (assoc :reply_markup reply_markup))))

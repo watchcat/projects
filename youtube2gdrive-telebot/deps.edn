@@ -5,7 +5,9 @@
          clj-http/clj-http                        {:mvn/version "3.13.0"}
          com.google.api-client/google-api-client  {:mvn/version "2.4.0"}
          com.github.dropbox/dropbox-sdk-java      {:mvn/version "5.4.6"}
-         org.slf4j/slf4j-simple                   {:mvn/version "2.0.13"}}
+         org.slf4j/slf4j-simple                   {:mvn/version "2.0.13"}
+         ring/ring-defaults                       {:mvn/version "0.4.0"}
+         compojure/compojure                      {:mvn/version "1.7.0"}}
  :aliases
  {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.4" :git/sha "a255169"}}
           :ns-default build}

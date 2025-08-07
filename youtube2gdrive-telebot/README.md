@@ -14,6 +14,7 @@ This is a Telegram bot that can download YouTube videos as video or audio and up
     -   `:dropbox/folder`: The path to the Dropbox folder for uploads (e.g., `/youtube-downloads`).
     -   `:default-storage`: The default upload destination, either `:gdrive` or `:dropbox`.
     -   `:base-url`: The base URL where your bot's webhook is publicly accessible (e.g., `https://your-domain.com`).
+    -   `:auth/token`: A secret token for authenticating the Mini App. You can generate one with `openssl rand -hex 16`.
 
 ## Installation
 
@@ -37,10 +38,10 @@ The bot will start a web server on port 8080 to listen for webhook requests from
 
 For the bot to receive messages from Telegram, you need to set up a webhook. You can do this by sending a request to the Telegram Bot API.
 
-Replace `YOUR_BOT_TOKEN` and `YOUR_WEBHOOK_URL` with your actual bot token and the URL where your bot is running. The webhook URL should be the `:base-url` from your config file, with the `/webhook` path appended if your handler is mapped to that. Since this bot's handler is at the root, the URL is just the `:base-url`.
+Replace `YOUR_BOT_TOKEN` and `YOUR_WEBHOOK_URL` with your actual bot token and the URL where your bot is running. The webhook URL should be the `:base-url` from your config file, with `/webhook` appended.
 
 ```
-https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=<YOUR_WEBHOOK_URL>
+https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=<YOUR_BASE_URL>/webhook
 ```
 
 You can open this URL in your browser or use a tool like `curl` to set the webhook.
@@ -57,6 +58,7 @@ Once the bot is running and the webhook is set, you can send commands to it in y
 -   `/audio <gdrive|dropbox> <url>`: Extracts the audio and uploads it to the specified storage.
 -   `/drivelist`: Lists all files in the configured Google Drive folder.
 -   `/drivedelete <file-id>`: Deletes a file from the Google Drive folder using its ID.
+-   `/app`: Opens the file browser Mini App.
 
 ## Deployment to Google Cloud
 

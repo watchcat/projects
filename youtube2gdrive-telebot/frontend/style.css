@@ -1,0 +1,31 @@
+body {
+    font-family: sans-serif;
+    padding: 1rem;
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-bg-color);
+}
+
+h1 {
+    color: var(--tg-theme-text-color);
+}
+
+#search-bar {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--tg-theme-hint-color);
+    border-radius: 5px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+#file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#file-list li {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--tg-theme-hint-color);
+}

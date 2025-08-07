@@ -4,4 +4,5 @@
  :dropbox/token      "DROPBOX_APP_TOKEN"
  :dropbox/folder     "/from-youtube"
  :default-storage    :gdrive          ; or :dropbox
- :base-url           "https://example.com/webhook"}
+ :base-url           "https://example.com/webhook"
+ :auth/token         "some-secret-token"}

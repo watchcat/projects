@@ -5,6 +5,10 @@
             [clojure.string :as str]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.util.response :as resp]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [compojure.core :refer [defroutes GET POST]]
+            [compojure.route :as route]
+            [cheshire.core :as json]
             [bot.telegram :as tg]
             [bot.ytdlp :as ytdlp]
             [bot.gdrive :as gdrv]
@@ -47,6 +51,9 @@
       (when-let [file-id (first args)]
         {:command :drivedelete :file-id file-id})
 
+      "/app"
+      {:command :app}
+
       nil)))
 
 (defn process-command [chat-id {:keys [command] :as job}]
@@ -86,15 +93,38 @@
           (tg/send-message (:telegram/token cfg) chat-id (str "File " file-id " deleted."))
           (catch Exception e
             (tg/send-message (:telegram/token cfg) chat-id "Failed to delete file.")
-            (.printStackTrace e)))))))
+            (.printStackTrace e)))))
 
-(defn handler [{:keys [request-method body]}]
-  (when (= request-method :post)
+    :app
+    (let [app-url (str (:base-url cfg) "?token=" (:auth/token cfg))]
+      (tg/send-message (:telegram/token cfg) chat-id "Open the file browser app:"
+                       :reply_markup {:inline_keyboard [[{:text "Open App" :web_app {:url app-url}}]]}))))
+
+(defn wrap-auth [handler]
+  (fn [request]
+    (if (= (get-in request [:headers "authorization"])
+           (str "Bearer " (:auth/token cfg)))
+      (handler request)
+      {:status 401 :body "Unauthorized"})))
+
+(defroutes api-routes
+  (GET "/files" []
+    (let [files (gdrv/list-files @gdrv* (:google/folder-id cfg))]
+      (-> (resp/response (json/encode files))
+          (resp/header "Content-Type" "application/json")))))
+
+(defroutes app-routes
+  (POST "/webhook" {body :body}
     (let [txt (get-in body ["message" "text"])
           cid (get-in body ["message" "chat" "id"])]
       (when-let [job (and txt (parse-command txt))]
-        (process-command cid job))))
-  (resp/response "ok"))
+        (process-command cid job)))
+    (resp/response "ok"))
+  (compojure.core/context "/api" [] (wrap-auth api-routes))
+  (route/resources "/" {:root "frontend"}))
+
+(def app
+  (wrap-defaults app-routes (assoc-in site-defaults [:security :csrf] false)))
 
 (defn -main [& _]
-  (run-jetty handler {:port 8080 :join? true}))
+  (run-jetty app {:port 8080 :join? true}))
