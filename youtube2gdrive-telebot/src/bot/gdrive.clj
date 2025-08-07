@@ -27,3 +27,15 @@
                stream)
         file  (.. drive files (create meta media) (setFields "id,webViewLink") execute)]
     {:link (.getWebViewLink file)}))
+
+(defn list-files
+  [^com.google.api.services.drive.Drive drive folder-id]
+  (let [query (str "'" folder-id "' in parents")
+        fields "files(id,name)"
+        result (.. drive files list (setQ query) (setFields fields) execute)]
+    (map (fn [^File f] {:id (.getId f) :name (.getName f)})
+         (.getFiles result))))
+
+(defn delete-file
+  [^com.google.api.services.drive.Drive drive file-id]
+  (.. drive files (delete file-id) execute))

@@ -55,6 +55,8 @@ Once the bot is running and the webhook is set, you can send commands to it in y
 -   `/audio <url>`: Extracts the audio from the video at the given URL (as mp3) and uploads it to the default storage.
 -   `/video <gdrive|dropbox> <url>`: Downloads the video and uploads it to the specified storage.
 -   `/audio <gdrive|dropbox> <url>`: Extracts the audio and uploads it to the specified storage.
+-   `/drivelist`: Lists all files in the configured Google Drive folder.
+-   `/drivedelete <file-id>`: Deletes a file from the Google Drive folder using its ID.
 
 ## Deployment to Google Cloud
 
