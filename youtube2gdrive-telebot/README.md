@@ -55,3 +55,27 @@ Once the bot is running and the webhook is set, you can send commands to it in y
 -   `/audio <url>`: Extracts the audio from the video at the given URL (as mp3) and uploads it to the default storage.
 -   `/video <gdrive|dropbox> <url>`: Downloads the video and uploads it to the specified storage.
 -   `/audio <gdrive|dropbox> <url>`: Extracts the audio and uploads it to the specified storage.
+
+## Deployment to Google Cloud
+
+This project includes a script to deploy the bot to [Google Cloud Run](https://cloud.google.com/run).
+
+### Prerequisites
+
+1.  [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed and initialized.
+2.  You must be authenticated with gcloud: `gcloud auth login`.
+3.  You must have a Google Cloud project created.
+
+### Steps
+
+1.  **Edit `deploy.sh`**: Open the `deploy.sh` script and set your `GCP_PROJECT_ID` and optionally the `GCP_REGION`.
+2.  **Run the script**:
+    ```bash
+    ./deploy.sh
+    ```
+3.  The script will:
+    -   Enable the required Google Cloud services.
+    -   Build the Docker container using Google Cloud Build.
+    -   Deploy the container to Google Cloud Run.
+    -   Print the URL of the deployed service.
+4.  **Set the Webhook**: Use the URL provided at the end of the deployment to set your Telegram webhook as described in the "Setting up the Telegram Webhook" section.
