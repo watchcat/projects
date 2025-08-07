@@ -1,0 +1,8 @@
+{:telegram/token     "BOT_TOKEN_HERE"
+ :google/creds       "gdrive-service-account.json"
+ :google/folder-id   "GOOGLE_FOLDER_ID"
+ :dropbox/token      "DROPBOX_APP_TOKEN"
+ :dropbox/folder     "/from-youtube"
+ :default-storage    :gdrive          ; or :dropbox
+ :base-url           "https://example.com/webhook"
+ :auth/token         "some-secret-token"}

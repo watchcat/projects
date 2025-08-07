@@ -8,6 +8,7 @@ COPY deps.edn .
 
 # Download dependencies
 RUN clojure -P
+RUN clojure -Sdeps '{:deps {com.google.api-client/google-api-client {:mvn/version "2.4.0"}}}'
 
 # Copy the rest of the source code
 COPY src ./src

@@ -8,7 +8,7 @@ set -euo pipefail
 # GCP_REGION: The region where you want to deploy the service (e.g., "us-central1").
 # SERVICE_NAME: The name of the Cloud Run service.
 # --------------------------------------------------------------------
-GCP_PROJECT_ID="your-gcp-project-id"
+GCP_PROJECT_ID="youtube2gdrive-telebot"
 GCP_REGION="us-central1"
 SERVICE_NAME="youtube2gdrive-telebot"
 

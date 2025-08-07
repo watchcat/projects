@@ -4,7 +4,7 @@
 (def lib 'youtube2gdrive/telebot)
 (def version "0.1.0")
 (def class-dir "target/classes")
-(def basis (b/create-basis {:project "deps.edn"}))
+(def basis (b/create-basis {:project "deps.edn" :aliases [:uberjar]}))
 (def uber-file (format "target/%s-standalone.jar" (name lib)))
 
 (defn clean [_]

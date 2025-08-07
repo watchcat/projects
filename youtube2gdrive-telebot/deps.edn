@@ -4,11 +4,20 @@
          cheshire/cheshire                        {:mvn/version "5.13.0"}
          clj-http/clj-http                        {:mvn/version "3.13.0"}
          com.google.api-client/google-api-client  {:mvn/version "2.4.0"}
-         com.github.dropbox/dropbox-sdk-java      {:mvn/version "5.4.6"}
+         com.dropbox.core/dropbox-core-sdk        {:mvn/version "7.0.0"}
          org.slf4j/slf4j-simple                   {:mvn/version "2.0.13"}
          ring/ring-defaults                       {:mvn/version "0.4.0"}
          compojure/compojure                      {:mvn/version "1.7.0"}}
  :aliases
- {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.4" :git/sha "a255169"}}
+ {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.10.10" :git/sha "deedd62"}}
           :ns-default build}
-  :run {:main-opts ["-m" "bot.core"]}}}
+  :run {:main-opts ["-m" "bot.core"]}
+  :uberjar {:replace-deps {org.clojure/clojure                      {:mvn/version "1.12.0-alpha5"}
+                           org.clojure/core.async                   {:mvn/version "1.6.681"}
+                           cheshire/cheshire                        {:mvn/version "5.13.0"}
+                           clj-http/clj-http                        {:mvn/version "3.13.0"}
+                           com.google.api-client/google-api-client  {:mvn/version "2.4.0"}
+                           com.dropbox.core/dropbox-core-sdk        {:mvn/version "7.0.0"}
+                           org.slf4j/slf4j-simple                   {:mvn/version "2.0.13"}
+                           ring/ring-defaults                       {:mvn/version "0.4.0"}
+                           compojure/compojure                      {:mvn/version "1.7.0"}}}}}
