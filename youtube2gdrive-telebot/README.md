@@ -58,7 +58,20 @@ Once the bot is running and the webhook is set, you can send commands to it in y
 -   `/audio <gdrive|dropbox> <url>`: Extracts the audio and uploads it to the specified storage.
 -   `/drivelist`: Lists all files in the configured Google Drive folder.
 -   `/drivedelete <file-id>`: Deletes a file from the Google Drive folder using its ID.
--   `/app`: Opens the file browser Mini App.
+
+## Mini App
+
+This bot includes a Telegram Mini App for browsing and searching your files in Google Drive. To use it, you need to set up a menu button for your bot.
+
+### Setting up the Menu Button
+
+1.  Open a chat with the [BotFather](https://t.me/botfather).
+2.  Send the `/mybots` command and choose your bot.
+3.  Select "Bot Settings" -> "Menu Button".
+4.  Enter the URL of your Mini App. This should be your `:base-url` from the config file.
+5.  The BotFather will ask you for a name for the menu button, for example, "Open App".
+
+Once you have done this, a menu button will appear in your chat with the bot. Tapping it will open the Mini App.
 
 ## Deployment to Google Cloud
 

@@ -31,9 +31,9 @@
 (defn list-files
   [^com.google.api.services.drive.Drive drive folder-id]
   (let [query (str "'" folder-id "' in parents")
-        fields "files(id,name)"
+        fields "files(id,name,webViewLink)"
         result (.. drive files list (setQ query) (setFields fields) execute)]
-    (map (fn [^File f] {:id (.getId f) :name (.getName f)})
+    (map (fn [^File f] {:id (.getId f) :name (.getName f) :link (.getWebViewLink f)})
          (.getFiles result))))
 
 (defn delete-file

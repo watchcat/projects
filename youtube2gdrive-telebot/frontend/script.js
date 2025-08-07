@@ -40,7 +40,21 @@ function renderFiles(filesToRender) {
     fileList.innerHTML = '';
     filesToRender.forEach(file => {
         const li = document.createElement('li');
-        li.textContent = file.name;
+        const a = document.createElement('a');
+        a.href = file.link;
+        a.target = '_blank';
+        a.textContent = file.name;
+
+        const icon = document.createElement('span');
+        icon.className = 'file-icon';
+        if (file.name.endsWith('.mp3')) {
+            icon.textContent = '🎵';
+        } else {
+            icon.textContent = '🎬';
+        }
+
+        li.appendChild(icon);
+        li.appendChild(a);
         fileList.appendChild(li);
     });
 }

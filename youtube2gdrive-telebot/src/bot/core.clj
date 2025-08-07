@@ -51,9 +51,6 @@
       (when-let [file-id (first args)]
         {:command :drivedelete :file-id file-id})
 
-      "/app"
-      {:command :app}
-
       nil)))
 
 (defn process-command [chat-id {:keys [command] :as job}]
@@ -93,12 +90,7 @@
           (tg/send-message (:telegram/token cfg) chat-id (str "File " file-id " deleted."))
           (catch Exception e
             (tg/send-message (:telegram/token cfg) chat-id "Failed to delete file.")
-            (.printStackTrace e)))))
-
-    :app
-    (let [app-url (str (:base-url cfg) "?token=" (:auth/token cfg))]
-      (tg/send-message (:telegram/token cfg) chat-id "Open the file browser app:"
-                       :reply_markup {:inline_keyboard [[{:text "Open App" :web_app {:url app-url}}]]}))))
+            (.printStackTrace e)))))))
 
 (defn wrap-auth [handler]
   (fn [request]

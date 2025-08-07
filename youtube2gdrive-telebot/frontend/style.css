@@ -28,4 +28,10 @@ h1 {
 #file-list li {
     padding: 0.5rem;
     border-bottom: 1px solid var(--tg-theme-hint-color);
+    display: flex;
+    align-items: center;
+}
+
+.file-icon {
+    margin-right: 0.5rem;
 }
